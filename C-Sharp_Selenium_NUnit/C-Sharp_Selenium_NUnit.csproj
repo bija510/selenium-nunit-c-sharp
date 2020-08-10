@@ -77,6 +77,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PageObject\FB_login_PO.cs" />
     <Compile Include="PageObject\LoginPage.cs" />
     <Compile Include="PageObject\ForgetPasswordPage.cs" />
     <Compile Include="PageObject\SignUpPage.cs" />
@@ -84,12 +85,16 @@
     <Compile Include="BaseClass\BaseTest.cs" />
     <Compile Include="Test Cases\DataDriving.cs" />
     <Compile Include="Test Cases\ExtentReportTest.cs" />
+    <Compile Include="Test Cases\FB_login_Test.cs" />
+    <Compile Include="Test Cases\JavaScriptFunction.cs" />
     <Compile Include="Test Cases\OrderSkipAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test Cases\TearDown_ScreenShot.cs" />
     <Compile Include="Test Cases\TestClass.cs" />
     <Compile Include="Test Cases\ParallelTest.cs" />
     <Compile Include="Test Cases\Try_Catch_finally.cs" />
     <Compile Include="Test Cases\Facebook_POM.cs" />
+    <Compile Include="Test Cases\zTemp.cs" />
     <Compile Include="Utilites\BrowserUtility.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,10 +118,12 @@
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.GeckoDriver.0.27.0\build\Selenium.WebDriver.GeckoDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.GeckoDriver.0.27.0\build\Selenium.WebDriver.GeckoDriver.targets'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.IEDriver.3.150.1.2\build\Selenium.WebDriver.IEDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.IEDriver.3.150.1.2\build\Selenium.WebDriver.IEDriver.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.MSEdgeDriver.84.0.524\build\Selenium.WebDriver.MSEdgeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.MSEdgeDriver.84.0.524\build\Selenium.WebDriver.MSEdgeDriver.targets'))" />
   </Target>
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.84.0.4147.3001\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.84.0.4147.3001\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.GeckoDriver.0.27.0\build\Selenium.WebDriver.GeckoDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.GeckoDriver.0.27.0\build\Selenium.WebDriver.GeckoDriver.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.IEDriver.3.150.1.2\build\Selenium.WebDriver.IEDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.IEDriver.3.150.1.2\build\Selenium.WebDriver.IEDriver.targets')" />
+  <Import Project="..\packages\Selenium.WebDriver.MSEdgeDriver.84.0.524\build\Selenium.WebDriver.MSEdgeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.MSEdgeDriver.84.0.524\build\Selenium.WebDriver.MSEdgeDriver.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
