@@ -87,6 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClass\BaseTest1.cs" />
     <Compile Include="C-Sharp_FullCourse\all_basic.cs" />
     <Compile Include="PageObject\FB_login_PO.cs" />
     <Compile Include="PageObject\LoginPage.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Test Cases\Facebook_POM.cs" />
     <Compile Include="Test Cases\zTemp.cs" />
     <Compile Include="Utilites\BrowserUtility.cs" />
+    <Compile Include="Utilites\BrowserUtility1.cs" />
     <Compile Include="Utilites\ExcelUtility.cs" />
   </ItemGroup>
   <ItemGroup>

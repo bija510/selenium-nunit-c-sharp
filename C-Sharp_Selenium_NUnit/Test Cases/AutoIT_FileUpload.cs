@@ -1,11 +1,13 @@
 ﻿
 using AutoIt;
+using C_Sharp_Selenium_NUnit.BaseClass;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -14,7 +16,7 @@ using System.Threading.Tasks;
 namespace C_Sharp_Selenium_NUnit.Test_Cases
 {
     [TestFixture]
-    public class AutoIT_FileUpload
+    public class AutoIT_FileUpload : BaseTest1
     {
         /***************************************************************************
          * Need to download the AutoIt from nuget package manager
@@ -23,15 +25,16 @@ namespace C_Sharp_Selenium_NUnit.Test_Cases
         [Test]
         public void FileUploadTest()
         {
-            IWebDriver driver = new FirefoxDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("http://demo.automationtesting.in/FileUpload.html"); //  
-            String path = "C:\\Users\\Bijaya Chhetri\\Desktop\\autoIT.png";
+            driver.Navigate().GoToUrl("http://demo.automationtesting.in/FileUpload.html");  
+            
+            String relativeFilePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..")) + "\\Data\\TextFile.txt";
+            //driver.FindElement(By.XPath("//input[@id='input-4']")).SendKeys(relativeFilePath);
+            //Environment.Exit(0);
+
             IWebElement fileUpload = driver.FindElement(By.XPath("//div[@class='btn btn-primary btn-file']"));
             fileUpload.Click();
-
             AutoItX.WinActivate("File Upload");
-            AutoItX.Send(@path);
+            AutoItX.Send(relativeFilePath);
             Thread.Sleep(2000);
             AutoItX.Send("{ENTER}");
 
