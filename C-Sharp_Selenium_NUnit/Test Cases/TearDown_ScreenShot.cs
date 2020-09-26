@@ -3,6 +3,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.IO;
 using System.Threading;
 
 namespace C_Sharp_Selenium_NUnit.Test_Cases
@@ -57,7 +58,7 @@ namespace C_Sharp_Selenium_NUnit.Test_Cases
             {
                 ITakesScreenshot ts = driver as ITakesScreenshot;
                 Screenshot screenshot = ts.GetScreenshot();
-                screenshot.SaveAsFile("C:\\Users\\Bijaya Chhetri\\Documents\\Selenium-C#\\C-Sharp_Selenium_NUnit\\C-Sharp_Selenium_NUnit\\Screenshot\\"+ methodName + ".png", ScreenshotImageFormat.Png);
+                screenshot.SaveAsFile(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..")) + "\\Screenshot\\" + methodName + ".png", ScreenshotImageFormat.Png);
             }
 
             Thread.Sleep(3000);

@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -13,6 +14,7 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
 {
     public class BaseTest1 : BrowserUtility1
     {
+
         [OneTimeSetUp]
         public void SetUpEach()
         {
@@ -51,11 +53,13 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
             {
                 OpenQA.Selenium.ITakesScreenshot ts = driver as ITakesScreenshot;
                 Screenshot screenshot = ts.GetScreenshot();
-                screenshot.SaveAsFile("C:\\Users\\Bijaya Chhetri\\Documents\\Selenium-C#\\C-Sharp_Selenium_NUnit\\C-Sharp_Selenium_NUnit\\Screenshot\\" + methodName + ".png", ScreenshotImageFormat.Png);
+                screenshot.SaveAsFile(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..")) + "\\Screenshot\\" + methodName + ".png", ScreenshotImageFormat.Png);
             }
 
             Thread.Sleep(3000);
+            driver.Close();
             driver.Quit();
+
         }
     }
 }

@@ -9,6 +9,7 @@ using AventStack.ExtentReports.Reporter;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System.Threading;
+using System.IO;
 
 namespace C_Sharp_Selenium_NUnit
 {
@@ -21,7 +22,7 @@ namespace C_Sharp_Selenium_NUnit
         public void ExtentStart()
         {
             extent = new ExtentReports();
-            var htmlReporter = new ExtentHtmlReporter(@"C:\\Users\\Bijaya Chhetri\\Documents\\Selenium-C#\\C-Sharp_Selenium_NUnit\\C-Sharp_Selenium_NUnit\\ExtentReports\\htmlExtReport.html");
+            var htmlReporter = new ExtentHtmlReporter(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..")) + "\\ExtentReports\\htmlExtReport10.html");
             extent.AttachReporter(htmlReporter);
 
         }
@@ -44,7 +45,7 @@ namespace C_Sharp_Selenium_NUnit
                 test.Log(Status.Info,"Chrome browser lunched");
 
                 driver.Url = "https://www.facebook.com";
-                IWebElement firstName = driver.FindElement(By.XPath("//input[@id='u_0_m']"));
+                IWebElement firstName = driver.FindElement(By.XPath("//input[@id='email']"));
                 firstName.SendKeys("david");
                 test.Log(Status.Info, "First name Entered");
 
@@ -83,7 +84,7 @@ namespace C_Sharp_Selenium_NUnit
                 test.Log(Status.Info, "Chrome browser lunched");
 
                 driver.Url = "https://www.facebook.com";
-                IWebElement firstName = driver.FindElement(By.XPath("//input[@id='abcd']"));
+                IWebElement firstName = driver.FindElement(By.XPath("//input[@id='email']"));
                 firstName.SendKeys("david");
                 test.Log(Status.Info, "First name Entered");
 

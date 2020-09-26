@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using excel = Microsoft.Office.Interop.Excel;
 using NUnit.Framework;
 using System;
+using System.IO;
 
 namespace C_Sharp_Selenium_NUnit.Utilites
 {
@@ -18,7 +19,7 @@ namespace C_Sharp_Selenium_NUnit.Utilites
         public static void ReadExcelSheet()
         {
             excel.Application x1app = new excel.Application();
-            excel.Workbook x1workbook = x1app.Workbooks.Open(@"C:\Users\Bijaya Chhetri\Documents\Selenium-C#\C-Sharp_Selenium_NUnit\C-Sharp_Selenium_NUnit\Data\newdata.xlsx");
+            excel.Workbook x1workbook = x1app.Workbooks.Open(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..")) + "\\Data\\newdata.xlsx");
             excel.Worksheet x1worksheet = x1workbook.Sheets[1];
             excel.Range x1range = x1worksheet.UsedRange;
 

@@ -15,7 +15,7 @@ namespace C_Sharp_Selenium_NUnit.Test_Cases
         {          
             try
             {
-                string filePath = @"C:\Users\Bijaya Chhetri\Documents\Selenium-C#\C-Sharp_Selenium_NUnit\C-Sharp_Selenium_NUnit\Data\TextFile.txt";          
+                string filePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..")) + "\\Data\\TextFile.txt";          
                 List<string> lines = new List<string>();
                 lines = File.ReadLines(filePath).ToList();
 
@@ -23,7 +23,7 @@ namespace C_Sharp_Selenium_NUnit.Test_Cases
                 {
                     Console.WriteLine(line);
                 }
-                lines.Add("Hello world");
+                lines.Add("Hello world 9-26");
                 File.WriteAllLines(filePath, lines);              
             }
             catch (Exception e)
