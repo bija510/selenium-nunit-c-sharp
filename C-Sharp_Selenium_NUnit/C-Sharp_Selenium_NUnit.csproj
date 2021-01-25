@@ -40,6 +40,9 @@
     <Reference Include="AutoItX3.Assembly, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a646454c8d475470, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoItX.Dotnet.3.3.14.2\lib\AutoItX3.Assembly.dll</HintPath>
     </Reference>
+    <Reference Include="DnsClient, Version=1.3.1.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
+      <HintPath>..\packages\DnsClient.1.3.1\lib\net45\DnsClient.dll</HintPath>
+    </Reference>
     <Reference Include="ExtentReports, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ExtentReports.3.1.2\lib\ExtentReports.dll</HintPath>
     </Reference>
@@ -51,17 +54,20 @@
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="MongoDB.Bson, Version=2.4.0.70, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Bson.2.4.0\lib\net45\MongoDB.Bson.dll</HintPath>
+    <Reference Include="MongoDB.Bson, Version=2.11.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.11.4\lib\net452\MongoDB.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver, Version=2.4.0.70, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.2.4.0\lib\net45\MongoDB.Driver.dll</HintPath>
+    <Reference Include="MongoDB.Driver, Version=2.11.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.11.4\lib\net452\MongoDB.Driver.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver.Core, Version=2.4.0.70, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.Core.2.4.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+    <Reference Include="MongoDB.Driver.Core, Version=2.11.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.11.4\lib\net452\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="MongoDB.Libmongocrypt, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Libmongocrypt.1.0.0\lib\net452\MongoDB.Libmongocrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
@@ -69,12 +75,45 @@
     <Reference Include="RazorEngine, Version=3.9.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.9.0\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
+    <Reference Include="SharpCompress, Version=0.23.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.23.0\lib\net45\SharpCompress.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
@@ -104,6 +143,11 @@
     <Compile Include="Test Cases\OrderSkipAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test Cases\ReadAndWrite_TextFile.cs" />
+    <Compile Include="Test Cases\S01_openCloseBrowser.cs" />
+    <Compile Include="Test Cases\S02_refreshForwardBack.cs" />
+    <Compile Include="Test Cases\S03_CrossBrowserTest.cs" />
+    <Compile Include="Test Cases\S04_absoluteVSRelativePath.cs" />
+    <Compile Include="Test Cases\S05_Click_Sendkeys_GetText_Attribute.cs" />
     <Compile Include="Test Cases\TearDown_ScreenShot.cs" />
     <Compile Include="Test Cases\TestClass.cs" />
     <Compile Include="Test Cases\ParallelTest.cs" />
@@ -115,6 +159,7 @@
     <Compile Include="Utilites\ExcelUtility.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Data\newdata.xlsx" />
     <None Include="license" />
     <None Include="packages.config" />
@@ -124,6 +169,9 @@
     <Folder Include="Screenshot\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
+    <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
+    <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
     <Content Include="Data\TextFile.txt" />
     <Content Include="extent-config.xml" />
   </ItemGroup>
@@ -133,18 +181,24 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.12.0\build\NUnit.props'))" />
-    <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.84.0.4147.3001\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.84.0.4147.3001\build\Selenium.WebDriver.ChromeDriver.targets'))" />
-    <Error Condition="!Exists('..\packages\Selenium.WebDriver.GeckoDriver.0.27.0\build\Selenium.WebDriver.GeckoDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.GeckoDriver.0.27.0\build\Selenium.WebDriver.GeckoDriver.targets'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.IEDriver.3.150.1.2\build\Selenium.WebDriver.IEDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.IEDriver.3.150.1.2\build\Selenium.WebDriver.IEDriver.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.MSEdgeDriver.84.0.524\build\Selenium.WebDriver.MSEdgeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.MSEdgeDriver.84.0.524\build\Selenium.WebDriver.MSEdgeDriver.targets'))" />
     <Error Condition="!Exists('..\packages\AutoItX.Dotnet.3.3.14.2\build\AutoItX.Dotnet.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AutoItX.Dotnet.3.3.14.2\build\AutoItX.Dotnet.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.87.0.4280.2000\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.87.0.4280.2000\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\MongoDB.Libmongocrypt.1.0.0\build\MongoDB.Libmongocrypt.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MongoDB.Libmongocrypt.1.0.0\build\MongoDB.Libmongocrypt.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.GeckoDriver.0.28.0\build\Selenium.WebDriver.GeckoDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.GeckoDriver.0.28.0\build\Selenium.WebDriver.GeckoDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\MongoDB.Driver.Core.2.11.4\build\MongoDB.Driver.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MongoDB.Driver.Core.2.11.4\build\MongoDB.Driver.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.MSEdgeDriver.87.0.669\build\Selenium.WebDriver.MSEdgeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.MSEdgeDriver.87.0.669\build\Selenium.WebDriver.MSEdgeDriver.targets'))" />
   </Target>
-  <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.84.0.4147.3001\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.84.0.4147.3001\build\Selenium.WebDriver.ChromeDriver.targets')" />
-  <Import Project="..\packages\Selenium.WebDriver.GeckoDriver.0.27.0\build\Selenium.WebDriver.GeckoDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.GeckoDriver.0.27.0\build\Selenium.WebDriver.GeckoDriver.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.IEDriver.3.150.1.2\build\Selenium.WebDriver.IEDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.IEDriver.3.150.1.2\build\Selenium.WebDriver.IEDriver.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.MSEdgeDriver.84.0.524\build\Selenium.WebDriver.MSEdgeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.MSEdgeDriver.84.0.524\build\Selenium.WebDriver.MSEdgeDriver.targets')" />
   <Import Project="..\packages\AutoItX.Dotnet.3.3.14.2\build\AutoItX.Dotnet.targets" Condition="Exists('..\packages\AutoItX.Dotnet.3.3.14.2\build\AutoItX.Dotnet.targets')" />
+  <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.87.0.4280.2000\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.87.0.4280.2000\build\Selenium.WebDriver.ChromeDriver.targets')" />
+  <Import Project="..\packages\MongoDB.Libmongocrypt.1.0.0\build\MongoDB.Libmongocrypt.targets" Condition="Exists('..\packages\MongoDB.Libmongocrypt.1.0.0\build\MongoDB.Libmongocrypt.targets')" />
+  <Import Project="..\packages\Selenium.WebDriver.GeckoDriver.0.28.0\build\Selenium.WebDriver.GeckoDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.GeckoDriver.0.28.0\build\Selenium.WebDriver.GeckoDriver.targets')" />
+  <Import Project="..\packages\MongoDB.Driver.Core.2.11.4\build\MongoDB.Driver.Core.targets" Condition="Exists('..\packages\MongoDB.Driver.Core.2.11.4\build\MongoDB.Driver.Core.targets')" />
+  <Import Project="..\packages\Selenium.WebDriver.MSEdgeDriver.87.0.669\build\Selenium.WebDriver.MSEdgeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.MSEdgeDriver.87.0.669\build\Selenium.WebDriver.MSEdgeDriver.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

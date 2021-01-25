@@ -23,9 +23,10 @@ namespace C_Sharp_Selenium_NUnit.Test_Cases
             String relativeFilePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..")) +"\\Data\\TextFile.txt";
                    
             Console.WriteLine(relativeFilePath);
+
+            driver.FindElement(By.XPath("//input[@id='input-']")).SendKeys(relativeFilePath);
            
-            driver.FindElement(By.XPath("//input[@id='input-4']")).SendKeys(relativeFilePath);
-            
+
         }
 
     }
