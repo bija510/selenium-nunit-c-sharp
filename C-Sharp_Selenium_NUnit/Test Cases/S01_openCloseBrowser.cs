@@ -12,6 +12,8 @@ namespace C_Sharp_Selenium_NUnit.Test_Cases
     [TestFixture]
     class S01_openCloseBrowser
     {
+        //NOTE: AUTO_FORMAT = CTRL + K FOLLOWED BY F
+
         IWebDriver driver = new ChromeDriver();
         [Test]
         public void openClose()

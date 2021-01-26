@@ -148,6 +148,15 @@
     <Compile Include="Test Cases\S03_CrossBrowserTest.cs" />
     <Compile Include="Test Cases\S04_absoluteVSRelativePath.cs" />
     <Compile Include="Test Cases\S05_Click_Sendkeys_GetText_Attribute.cs" />
+    <Compile Include="Test Cases\S06_DropdownList_DDL.cs" />
+    <Compile Include="Test Cases\S07_CheckBx_RadioBtn.cs" />
+    <Compile Include="Test Cases\S08_Misc_function.cs" />
+    <Compile Include="Test Cases\S09_Asserts.cs" />
+    <Compile Include="Test Cases\S10_ImplicitWait.cs" />
+    <Compile Include="Test Cases\S11_ExplicitWait.cs" />
+    <Compile Include="Test Cases\S12_Calendar_Datepicker.cs" />
+    <Compile Include="Test Cases\S13_Frame.cs" />
+    <Compile Include="Test Cases\S14_MultipleWindow_ChildWindow.cs" />
     <Compile Include="Test Cases\TearDown_ScreenShot.cs" />
     <Compile Include="Test Cases\TestClass.cs" />
     <Compile Include="Test Cases\ParallelTest.cs" />
