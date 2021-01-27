@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace C_Sharp_Selenium_NUnit.Test_Cases
 {
     [TestFixture]
-    class headless_browser
+    class S30_headless_browser
     {
 
         [Test]

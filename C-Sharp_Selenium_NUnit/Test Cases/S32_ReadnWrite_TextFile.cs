@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace C_Sharp_Selenium_NUnit.Test_Cases
 {
     [TestFixture]
-    class ReadAndWrite_TextFile
+    class S32_ReadnWrite_TextFile
     {
         [Test]
         public static void readwrite()

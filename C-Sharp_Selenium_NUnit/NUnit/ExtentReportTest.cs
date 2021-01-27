@@ -42,7 +42,7 @@ namespace C_Sharp_Selenium_NUnit
                 test = extent.CreateTest("Test1").Info("Test Started");
                 driver = new FirefoxDriver();
                 driver.Manage().Window.Maximize();
-                test.Log(Status.Info,"Chrome browser lunched");
+                test.Log(Status.Info, "Chrome browser lunched");
 
                 driver.Url = "https://www.facebook.com";
                 IWebElement firstName = driver.FindElement(By.XPath("//input[@id='email']"));
@@ -50,25 +50,21 @@ namespace C_Sharp_Selenium_NUnit
                 test.Log(Status.Info, "First name Entered");
 
                 Thread.Sleep(2000);
-                
+
                 driver.Quit();
                 test.Log(Status.Pass, "Test1 passed Successfully");
-                
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw;
-
             }
             finally
             {
-                if (driver!= null)
+                if (driver != null)
                 {
                     driver.Quit();
                 }
-
             }
-
         }
 
         [Test]
@@ -92,13 +88,11 @@ namespace C_Sharp_Selenium_NUnit
 
                 driver.Quit();
                 test.Log(Status.Pass, "Test2 passed Successfully");
-
             }
             catch (Exception e)
             {
                 test.Log(Status.Fail, e.ToString());
                 throw;
-
             }
             finally
             {
@@ -106,12 +100,7 @@ namespace C_Sharp_Selenium_NUnit
                 {
                     driver.Quit();
                 }
-
             }
-
         }
-
-
-
     }
 }

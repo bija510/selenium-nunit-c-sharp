@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace C_Sharp_Selenium_NUnit.Test_Cases
 {
     [TestFixture]
-    public class AutoIT_FileUpload : BaseTest1
+    public class S29_AutoIT_FileUpload : BaseTest1
     {
         /***************************************************************************
          * Need to download the AutoIt from nuget package manager

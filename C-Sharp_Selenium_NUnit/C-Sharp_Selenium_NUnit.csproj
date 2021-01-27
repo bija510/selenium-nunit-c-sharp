@@ -37,6 +37,9 @@
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp, Version=0.14.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngleSharp.0.14.0\lib\net461\AngleSharp.dll</HintPath>
+    </Reference>
     <Reference Include="AutoItX3.Assembly, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a646454c8d475470, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoItX.Dotnet.3.3.14.2\lib\AutoItX3.Assembly.dll</HintPath>
     </Reference>
@@ -49,10 +52,16 @@
     <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.1.9, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.1\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Registry.5.0.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson, Version=2.11.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MongoDB.Bson.2.11.4\lib\net452\MongoDB.Bson.dll</HintPath>
@@ -90,10 +99,16 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.5.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
@@ -115,6 +130,12 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
@@ -124,6 +145,9 @@
     <Reference Include="WebDriver.Support, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.Support.3.141.0\lib\net45\WebDriver.Support.dll</HintPath>
     </Reference>
+    <Reference Include="WebDriverManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebDriverManager.2.11.1\lib\netstandard2.0\WebDriverManager.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseClass\BaseTest1.cs" />
@@ -132,17 +156,17 @@
     <Compile Include="PageObject\LoginPage.cs" />
     <Compile Include="PageObject\ForgetPasswordPage.cs" />
     <Compile Include="PageObject\SignUpPage.cs" />
-    <Compile Include="Test Cases\Author_Description.cs" />
+    <Compile Include="NUnit\Author_Description.cs" />
     <Compile Include="BaseClass\BaseTest.cs" />
-    <Compile Include="Test Cases\AutoIT_FileUpload.cs" />
-    <Compile Include="Test Cases\DataDriving.cs" />
-    <Compile Include="Test Cases\ExtentReportTest.cs" />
-    <Compile Include="Test Cases\FB_login_Test.cs" />
-    <Compile Include="Test Cases\headless_browser.cs" />
+    <Compile Include="Test Cases\S29_AutoIT_FileUpload.cs" />
+    <Compile Include="NUnit\DataDriving.cs" />
+    <Compile Include="NUnit\ExtentReportTest.cs" />
+    <Compile Include="NUnit\FB_login_Test.cs" />
+    <Compile Include="Test Cases\S30_headless_browser.cs" />
     <Compile Include="Test Cases\S23_JavaScriptFunction.cs" />
-    <Compile Include="Test Cases\OrderSkipAttribute.cs" />
+    <Compile Include="NUnit\OrderSkipAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test Cases\ReadAndWrite_TextFile.cs" />
+    <Compile Include="Test Cases\S32_ReadnWrite_TextFile.cs" />
     <Compile Include="Test Cases\S01_openCloseBrowser.cs" />
     <Compile Include="Test Cases\S02_refreshForwardBack.cs" />
     <Compile Include="Test Cases\S03_CrossBrowserTest.cs" />
@@ -164,16 +188,20 @@
     <Compile Include="Test Cases\S19_MouseEvent.cs" />
     <Compile Include="Test Cases\S20_DisplayedSelectedEnabled.cs" />
     <Compile Include="Test Cases\S21_Screenshot.cs" />
+    <Compile Include="Test Cases\S25_returnType.cs" />
     <Compile Include="Test Cases\S24_WindowAuthPopUpTest.cs" />
-    <Compile Include="Test Cases\TearDown_ScreenShot.cs" />
-    <Compile Include="Test Cases\TestClass.cs" />
-    <Compile Include="Test Cases\ParallelTest.cs" />
+    <Compile Include="Test Cases\S26_setEncryptedPasswords.cs" />
+    <Compile Include="Test Cases\S27_GetToolTipText.cs" />
+    <Compile Include="Test Cases\S28_Remote_WebDriverManager.cs" />
+    <Compile Include="NUnit\TearDown_ScreenShot.cs" />
+    <Compile Include="NUnit\TestClass.cs" />
+    <Compile Include="NUnit\ParallelTest.cs" />
     <Compile Include="Test Cases\S22_Try_Catch_Finally.cs" />
-    <Compile Include="Test Cases\Facebook_POM.cs" />
+    <Compile Include="NUnit\Facebook_POM.cs" />
     <Compile Include="Test Cases\zTemp.cs" />
     <Compile Include="Utilites\BrowserUtility.cs" />
     <Compile Include="Utilites\BrowserUtility1.cs" />
-    <Compile Include="Utilites\ExcelUtility.cs" />
+    <Compile Include="Test Cases\S31_ExcelUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
