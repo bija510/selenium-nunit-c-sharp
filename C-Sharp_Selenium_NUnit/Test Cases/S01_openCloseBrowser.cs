@@ -13,12 +13,13 @@ namespace C_Sharp_Selenium_NUnit.Test_Cases
     class S01_openCloseBrowser
     {
         //NOTE: AUTO_FORMAT = CTRL + K FOLLOWED BY F
+        //    : cw + 2 times tab = Console.WriteLine();
 
         IWebDriver driver = new ChromeDriver();
         [Test]
         public void openClose()
         {
-            
+            Console.WriteLine();
             driver.Navigate().GoToUrl("https://www.google.com/");
         }
 

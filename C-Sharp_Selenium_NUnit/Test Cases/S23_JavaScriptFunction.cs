@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace C_Sharp_Selenium_NUnit.Test_Cases
 {
     [TestFixture]
-    class JavaScriptFunction
+    class S23_JavaScriptFunction
     {
         IWebDriver driver;
         [Test]
