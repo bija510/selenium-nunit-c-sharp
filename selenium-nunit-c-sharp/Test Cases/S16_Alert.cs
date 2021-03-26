@@ -16,7 +16,7 @@ namespace C_Sharp_Selenium_NUnit.Test_Cases
     [Test]
     public void acceptAlert()
         {
-            driver.Url = "https://www.rahulshettyacademy.com/AutomationPractice/";
+        driver.Url = "https://www.rahulshettyacademy.com/AutomationPractice/";
 		IWebElement alertBtn = driver.FindElement(By.XPath("//input[@id='alertbtn']"));
         alertBtn.Click();
 		Thread.Sleep(3000);

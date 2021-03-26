@@ -21,7 +21,7 @@ namespace C_Sharp_Selenium_NUnit
         {
             IWebDriver driver = new FirefoxDriver();
             driver.Url = "https://www.facebook.com";
-            IWebElement firstName = driver.FindElement(By.XPath("//input[@id='u_0_m']"));
+            IWebElement firstName = driver.FindElement(By.XPath("//*[@id='email']"));
             firstName.SendKeys(fName);
             Thread.Sleep(2000);
             driver.Quit();

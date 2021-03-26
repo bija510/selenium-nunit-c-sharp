@@ -28,9 +28,7 @@ namespace C_Sharp_Selenium_NUnit.Test_Cases
             driver.Navigate().GoToUrl("http://demo.automationtesting.in/FileUpload.html");  
             
             String relativeFilePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..")) + "\\Data\\TextFile.txt";
-            //driver.FindElement(By.XPath("//input[@id='input-4']")).SendKeys(relativeFilePath);
-            //Environment.Exit(0);
-
+          
             IWebElement fileUpload = driver.FindElement(By.XPath("//div[@class='btn btn-primary btn-file']"));
             fileUpload.Click();
             AutoItX.WinActivate("File Upload");
@@ -38,6 +36,15 @@ namespace C_Sharp_Selenium_NUnit.Test_Cases
             Thread.Sleep(2000);
             AutoItX.Send("{ENTER}");
 
+        }
+        [Test]
+        public void fileUploadUsingSendKeys()
+        {
+            driver.Navigate().GoToUrl("http://demo.automationtesting.in/FileUpload.html");
+
+            String relativeFilePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..")) + "\\Data\\TextFile.txt";
+            driver.FindElement(By.XPath("//input[@id='input-4']")).SendKeys(relativeFilePath);
+            Environment.Exit(0);
         }
     }
 }
