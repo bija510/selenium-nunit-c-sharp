@@ -1,0 +1,7 @@
+﻿
+{
+    "Environment": "QA" ,
+    "BaseUrl"    : "https://demo.automationtesting.in/Register.html",
+    "Browser"    : "chrome"
+}
+
