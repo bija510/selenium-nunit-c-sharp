@@ -29,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="PageObjects\" />
     <Folder Include="Screenshots\" />
   </ItemGroup>
 

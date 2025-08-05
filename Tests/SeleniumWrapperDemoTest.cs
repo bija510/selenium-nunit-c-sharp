@@ -1,117 +1,93 @@
 ﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using BC.Selenium.WebUI;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
-using WebDriverManager.DriverConfigs.Impl;
-using WebDriverManager;
 using C_Sharp_Selenium_NUnit.BaseClass;
-using System.Buffers.Text;
+using C_Sharp_Selenium_NUnit.Pages;
 
 namespace C_Sharp_Selenium_NUnit.Tests
 {
     [TestFixture]
     public class SeleniumWrapperDemoTest : BaseTest
     {
+        // Yes — in C#, the underscore (_) prefix is a common naming convention for private fields.
+
+        private RegistrationPage _registration;
+
+        [SetUp]
+        public void SetUpPage() => _registration = new RegistrationPage();
+
         [Test, Order(1)]
         public void TestOpenRegistrationPage()
         {
-            WebUI.NavigateToUrl(baseUrl);
-            WebUI.WaitForPageLoad();
-            WebUI.SetText(By.CssSelector("input[placeholder='First Name']"), "John");
-            Assert.That(WebUI.VerifyElementPresent(By.Id("Skills")));
+            _registration.Open();
+            _registration.EnterFirstName("John");
+            Assert.That(_registration.IsSkillVisible());
         }
 
         [Test, Order(2)]
         public void TestFillBasicInfoAndSelectSkills()
         {
-            WebUI.NavigateToUrl("https://demo.automationtesting.in/Register.html");
+            _registration.Open();
+            _registration.EnterFirstName("John");
+            _registration.EnterLastName("Doe");
+            _registration.EnterEmail("john.doe@example.com");
+            _registration.EnterPhone("1234567890");
 
-            WebUI.SetText(By.CssSelector("input[placeholder='First Name']"), "John");
-            WebUI.SetText(By.CssSelector("input[placeholder='Last Name']"), "Doe");
-            WebUI.SetText(By.CssSelector("input[type='email']"), "john.doe@example.com");
-            WebUI.SetText(By.Id("phone"), "1234567890");
+            _registration.SelectSkillByText("Java");
+            _registration.SelectSkillByValue("APIs");
+            _registration.SelectSkillByIndex(5);
 
-            WebUI.SelectOptionByLabel(By.Id("Skills"), "Java");
-            WebUI.SelectOptionByValue(By.Id("Skills"), "APIs");
-            WebUI.SelectOptionByIndex(By.Id("Skills"), 5);
-
-            Assert.That(WebUI.VerifyElementVisible(By.Id("Skills")));
+            Assert.That(_registration.IsSkillVisible());
         }
 
         [Test, Order(3)]
         public void TestCheckAndUncheckHobbies()
         {
-            WebUI.NavigateToUrl("https://demo.automationtesting.in/Register.html");
-
-            // Check 'Movies' checkbox
-            WebUI.Check(By.XPath("//input[@type='checkbox' and @value='Movies']"));
-            
-            // Uncheck 'Movies' checkbox
-            WebUI.Uncheck(By.XPath("//input[@type='checkbox' and @value='Movies']"));
-            
+            _registration.Open();
+            _registration.CheckMovies();
+            _registration.UncheckMovies();
         }
+
         [Test]
         public void Click_Checkbox_Movies_ShouldBeSelected()
         {
-            WebUI.NavigateToUrl("https://demo.automationtesting.in/Register.html");
-
-            var moviesCheckbox = By.XPath("//input[@type='checkbox' and @value='Movies']");
-            WebUI.Click(moviesCheckbox);
-
-            Assert.That(WebUI.IsSelected(moviesCheckbox), Is.True, "'Movies' checkbox should be selected after click.");
+            _registration.Open();
+            _registration.ClickMovies();
+            Assert.That(_registration.IsMoviesChecked(), Is.True);
         }
 
         [Test]
         public void SetText_FirstName_ShouldSetValue()
         {
-            WebUI.NavigateToUrl("https://demo.automationtesting.in/Register.html");
-
-            var firstNameInput = By.XPath("//input[@placeholder='First Nam']");
-            string expectedFirstName = "Victor";
-
-            WebUI.SetText(firstNameInput, expectedFirstName);
-
-            string actualFirstName = WebUI.GetAttribute(firstNameInput, "value");
-            Assert.That(actualFirstName, Is.EqualTo(expectedFirstName), "First Name input should contain the set value.");
+            _registration.Open();
+            string name = "Victor";
+            _registration.EnterFirstName(name);
+            Assert.That(_registration.GetFirstNameValue(), Is.EqualTo(name));
         }
 
         [Test]
         public void SelectDropdownByText_SkillsDropdown_ShouldSelectCorrectOption()
         {
-            WebUI.NavigateToUrl("https://demo.automationtesting.in/Register.html");
-
-            var skillsDropdown = By.Id("Skills");
+            _registration.Open();
             string expectedSkill = "Java";
-
-            WebUI.SelectDropdownByText(skillsDropdown, expectedSkill);
-
-            string selectedOption = WebUI.GetSelectedDropdownText(skillsDropdown);
-            Assert.That(selectedOption, Is.EqualTo(expectedSkill), "Skills dropdown should have the selected option.");
+            _registration.SelectSkillByText(expectedSkill);
+            Assert.That(_registration.GetSelectedSkill(), Is.EqualTo(expectedSkill));
         }
+
         [Test, Order(4)]
         public void TestDropdownAndScreenshot()
         {
-            WebUI.NavigateToUrl("https://demo.automationtesting.in/Register.html");
-
-            WebUI.SelectOptionByLabel(By.Id("Skills"), "Java");
-            WebUI.TakeScreenshot("SkillDDL"); // Screenshot saved with timestamp
-
-            Assert.That(WebUI.VerifyElementText(By.Id("Skills"), "Java"));
+            _registration.Open();
+            _registration.SelectSkillByText("Java");
+            _registration.TakeSkillsScreenshot("SkillDDL");
+            Assert.That(_registration.IsSkillTextCorrect("Java"));
         }
 
         [Test, Order(5)]
         public void TestScrollAndMouseOver()
         {
-            WebUI.NavigateToUrl("https://demo.automationtesting.in/Register.html");
-
-            // Scroll to footer link (using its partial text)
-            WebUI.ScrollToElement(By.PartialLinkText("Skip"));
-            WebUI.MouseOver(By.PartialLinkText("Skip"));
-
-            Assert.That(WebUI.VerifyElementVisible(By.PartialLinkText("Skip")));
+            _registration.Open();
+            _registration.ScrollToSkipLink();
+            _registration.MouseOverSkipLink();
+            Assert.That(_registration.IsSkipVisible());
         }
     }
 }
