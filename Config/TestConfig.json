@@ -1,7 +1,8 @@
-﻿
-{
-    "Environment": "QA" ,
-    "BaseUrl"    : "https://demo.automationtesting.in/Register.html",
-    "Browser"    : "chrome"
+﻿{
+  "Environment": "QA",
+  "Browser": "chrome",
+  "BaseUrl": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+  "UserName": "Admin",
+  "Password": "admin123"
 }
 
