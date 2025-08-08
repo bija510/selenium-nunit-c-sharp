@@ -7,11 +7,9 @@ namespace C_Sharp_Selenium_NUnit.Tests
     [TestFixture]
     public class LoginTest : BaseTest
     {
-        string userName = Config.UserName;
-        string password = Config.Password;
 
         [Test]
-        public void TestLoginValidateCredentials()
+        public void Login()
         {
             var loginPage = new LoginPage(Driver);
             loginPage.OpenLoginPage(baseUrl);

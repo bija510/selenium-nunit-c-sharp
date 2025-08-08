@@ -6,11 +6,11 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
 {
     public class LoginPage
     {
-        private readonly IWebDriver Driver;
+        private readonly IWebDriver? Driver;
         private readonly WebUI _WebUI;
 
 
-        public LoginPage(IWebDriver driver)
+        public LoginPage(IWebDriver? driver)
         {
             Driver = driver;
            _WebUI = new WebUI(driver);
@@ -20,6 +20,7 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
         private readonly By userNameField = By.XPath("//input[@placeholder='Username']");
         private readonly By passwordField = By.XPath("//input[@placeholder='Password']");
         private readonly By loginBtn = By.XPath("//button[@type='submit']");
+        private readonly By dashboardLabel = By.XPath("//h6[@class='oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module']");
 
         public void OpenLoginPage(string url)
         {
@@ -30,9 +31,7 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
             _WebUI.SendKeys(userNameField, userName);
             _WebUI.SendKeys(passwordField, password);
             _WebUI.Click(loginBtn);
-
+            _WebUI.VerifyTextPresent("Dashboard");
         }
-
-
     }
 }

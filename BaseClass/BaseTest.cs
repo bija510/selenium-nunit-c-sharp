@@ -1,15 +1,12 @@
-﻿using BC.Selenium.WebUI;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using WebDriverManager.DriverConfigs.Impl;
-using WebDriverManager;
 using OpenQA.Selenium.Firefox;
 using C_Sharp_Selenium_NUnit.Config;
-using System;
-using OpenQA.Selenium.BiDi.Communication;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
+using C_Sharp_Selenium_NUnit.Data;
+using OpenQA.Selenium.Chrome;
+using Newtonsoft.Json;
 
 
 namespace C_Sharp_Selenium_NUnit.BaseClass
@@ -17,13 +14,20 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
     public class BaseTest
     {
         protected IWebDriver? Driver;
+        protected static TestData pd;
+
 
         //TestProfile = POCO – Plain Old CLR Object) that define to match the structure of your JSON config file.
         protected static readonly TestProfile Config = ConfigReader.Load();
-        private string environment = Config.Environment;
-        protected string baseUrl = Config.BaseUrl;
+        private string environment = Config.Environment;       
         private string browser = Config.Browser;
 
+        protected string baseUrl = Config.BaseUrl;
+        protected string userName = Config.UserName;
+        protected string password = Config.Password;
+
+        // Load the test data from TestData.json
+        
 
         [OneTimeSetUp]
         public void GlobalSetup()
@@ -31,35 +35,49 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
             TestContext.WriteLine($"[OneTimeSetUp] Environment: {environment}");
             TestContext.WriteLine($"[OneTimeSetUp] Base URL: {baseUrl}");
             TestContext.WriteLine($"[OneTimeSetUp] Browser: {browser}");
+
+            var testDataReader = TestDataReader.Load();
+            pd = testDataReader.pd;
+
         }
 
         [SetUp]
         public void Setup()
         {
+            
             switch (browser.ToLower())
             {
                 case "chrome":
-                    var chromeOptions = new ChromeOptions();
-                    chromeOptions.AddArgument("--start-maximized");
-                    chromeOptions.PageLoadStrategy = PageLoadStrategy.Normal; // Normal / Eager
-                    Driver = new ChromeDriver(chromeOptions);
+                    var chromedriverManager = new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
+                    Driver = new ChromeDriver();
                     break;
 
                 case "edge":
-                    var edgeOptions = new EdgeOptions();
-                    edgeOptions.AddArgument("--start-maximized");
-                    Driver = new EdgeDriver(edgeOptions);
+                    var edgeDriverManager = new WebDriverManager.DriverManager().SetUpDriver(new EdgeConfig());
+                    Driver = new EdgeDriver();
+                    
                     break;
 
                 case "firefox":
-                    var firefoxOptions = new FirefoxOptions();
-                    firefoxOptions.AddArgument("--start-maximized");
+                    var firefoxDriverManager = new WebDriverManager.DriverManager().SetUpDriver(new FirefoxConfig());
+                    Driver = new FirefoxDriver();
                     break;
 
                 default:
                     Assert.Fail("Unsupported browser: " + browser);
                     break;
             }
+            
+            Console.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] [SETUP] Driver initialized for: {browser}");
+
+            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
+            Log($"[Setup] Page load timeout set to 30 seconds.");
+
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            Log($"[Setup] Implicit wait set to 10 seconds.");
+
+            Driver.Manage().Window.Maximize();
+            Log($"[Setup] Browser window maximized.");
         }
         
 
@@ -105,7 +123,9 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
             // Cleanup driver
             try
             {
-                Driver?.Quit();
+
+
+                //Driver?.Quit();
             }
             catch (Exception ex)
             {
