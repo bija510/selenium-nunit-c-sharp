@@ -7,7 +7,10 @@ using C_Sharp_Selenium_NUnit.Config;
 using C_Sharp_Selenium_NUnit.Data;
 using OpenQA.Selenium.Chrome;
 using Newtonsoft.Json;
-
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
+using System;
+using System.IO;
 
 namespace C_Sharp_Selenium_NUnit.BaseClass
 {
@@ -15,23 +18,25 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
     {
         protected IWebDriver? Driver;
         protected static TestData pd;
-
+        protected ExtentReports? extent;
+        protected ExtentTest? test;
 
         //TestProfile = POCO – Plain Old CLR Object) that define to match the structure of your JSON config file.
         protected static readonly TestProfile Config = ConfigReader.Load();
-        private string environment = Config.Environment;       
-        private string browser = Config.Browser;
+        private string environment = Config.Environment;
+        private string browser = Config.Browser.ToUpper();
 
         protected string baseUrl = Config.BaseUrl;
         protected string userName = Config.UserName;
         protected string password = Config.Password;
 
-        // Load the test data from TestData.json
-        
 
         [OneTimeSetUp]
         public void GlobalSetup()
         {
+            // Get shared instance
+            extent = ExtentReportManager.GetInstance(browser, environment);
+
             TestContext.WriteLine($"[OneTimeSetUp] Environment: {environment}");
             TestContext.WriteLine($"[OneTimeSetUp] Base URL: {baseUrl}");
             TestContext.WriteLine($"[OneTimeSetUp] Browser: {browser}");
@@ -44,22 +49,26 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
         [SetUp]
         public void Setup()
         {
-            
+            // Create a test node in ExtentReports for each test
+            test = extent?.CreateTest(TestContext.CurrentContext.Test.FullName);
+            // Link WebUI wrapper logs to Extent test
+            BC.Selenium.WebUI.WebUI.ExtentLogger = msg => test?.Info(msg);
+
             switch (browser.ToLower())
             {
                 case "chrome":
-                    var chromedriverManager = new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
+                    new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
                     Driver = new ChromeDriver();
                     break;
 
                 case "edge":
-                    var edgeDriverManager = new WebDriverManager.DriverManager().SetUpDriver(new EdgeConfig());
+                    new WebDriverManager.DriverManager().SetUpDriver(new EdgeConfig());
                     Driver = new EdgeDriver();
-                    
+
                     break;
 
                 case "firefox":
-                    var firefoxDriverManager = new WebDriverManager.DriverManager().SetUpDriver(new FirefoxConfig());
+                    new WebDriverManager.DriverManager().SetUpDriver(new FirefoxConfig());
                     Driver = new FirefoxDriver();
                     break;
 
@@ -67,19 +76,22 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
                     Assert.Fail("Unsupported browser: " + browser);
                     break;
             }
-            
-            Console.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] [SETUP] Driver initialized for: {browser}");
+
+
+            Log($"Driver initialized for: {browser}");
 
             Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
-            Log($"[Setup] Page load timeout set to 30 seconds.");
+            Log($"Page load timeout set to 30 seconds.");
 
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            Log($"[Setup] Implicit wait set to 10 seconds.");
+            Log($"Implicit wait set to 10 seconds.");
 
             Driver.Manage().Window.Maximize();
-            Log($"[Setup] Browser window maximized.");
+            Log($"Browser window maximized.");
+
+            test?.Info($"Browser {browser} launched and configured");
         }
-        
+
 
         [TearDown]
         public void TearDown()
@@ -87,37 +99,63 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
             var fullTestName = TestContext.CurrentContext.Test.FullName;
             var testMethodName = TestContext.CurrentContext.Test.Name;
             var testOutcome = TestContext.CurrentContext.Result.Outcome.Status;
+            var status = TestContext.CurrentContext.Result.Outcome.Status;
+            var errorMessage = TestContext.CurrentContext.Result.Message;
+            var stackTrace = TestContext.CurrentContext.Result.StackTrace;
 
-            Console.WriteLine($"[TearDown] {DateTime.Now:HH:mm:ss} Full Test Name: {fullTestName}");
-            Console.WriteLine($"[TearDown] {DateTime.Now:HH:mm:ss} Method Name: {testMethodName}");
-            Console.WriteLine($"[TearDown] {DateTime.Now:HH:mm:ss} Test Outcome: {testOutcome.ToString().ToUpper()}");
+            switch (status)
+            {
+                case NUnit.Framework.Interfaces.TestStatus.Passed:
+                    test?.Pass("Test passed");
+                    break;
+                case NUnit.Framework.Interfaces.TestStatus.Failed:
+                    test?.Fail(errorMessage);
+                    test?.Fail(stackTrace);
+                    break;
+                default:
+                    test?.Skip("Test skipped or inconclusive");
+                    break;
+            }
 
-            // Only log error details if test failed
+            Log($"Test finished: {testMethodName} with status {testOutcome}");
+
+
+
+
             if (testOutcome == NUnit.Framework.Interfaces.TestStatus.Failed)
             {
-                var errorMessage = TestContext.CurrentContext.Result.Message;
-                var stackTrace = TestContext.CurrentContext.Result.StackTrace;
-
-                Console.WriteLine($"[TearDown] ❌ Test Failed: {errorMessage}");
-                Console.WriteLine($"[TearDown] 🔍 Stack Trace: {stackTrace}");
+                test?.Fail("Test Failed: " + errorMessage);
+                test?.Fail(stackTrace);
 
                 try
                 {
                     string projectRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\.."));
                     string screenshotDir = Path.Combine(projectRoot, "Screenshots");
-                    Directory.CreateDirectory(screenshotDir); // Ensure the folder exists
+                    Directory.CreateDirectory(screenshotDir);
 
                     string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
                     string screenshotPath = Path.Combine(screenshotDir, $"{testMethodName}_{timestamp}.png");
 
                     Screenshot screenshot = ((ITakesScreenshot)Driver).GetScreenshot();
                     screenshot.SaveAsFile(screenshotPath);
-                    Console.WriteLine($"[TearDown] 📸 Screenshot saved to: {screenshotPath}");
+
+                    Log($"Screenshot saved to: {screenshotPath}");
+
+                    // Add screenshot to report
+                    test?.AddScreenCaptureFromPath(screenshotPath);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[TearDown][ERROR] Failed to take screenshot: {ex.Message}");
+                    Log($"Failed to take screenshot: {ex.Message}");
                 }
+            }
+            else if (testOutcome == NUnit.Framework.Interfaces.TestStatus.Passed)
+            {
+                test?.Pass("Test Passed");
+            }
+            else
+            {
+                test?.Skip("Test Skipped or Inconclusive");
             }
 
             // Cleanup driver
@@ -125,11 +163,12 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
             {
 
 
-                //Driver?.Quit();
+                Driver?.Quit();
+                Log("Driver quit successfully");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[TearDown][ERROR] Failed to quit driver: {ex.Message}");
+                Log($"Failed to quit driver: {ex.Message}");
             }
         }
 
@@ -140,9 +179,10 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
         }
 
         [OneTimeTearDown]
-        public void TearDownEach()
+        public void OneTimeTearDown()
         {
-            Console.WriteLine("This will executed only at the End");
+            ExtentReportManager.Flush();
+            Log("ExtentReports flushed");
         }
 
     }

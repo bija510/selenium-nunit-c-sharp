@@ -1,6 +1,6 @@
 ﻿{
   "Environment": "QA",
-  "Browser": "edge",
+  "Browser": "chrome",
   "BaseUrl": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
   "UserName": "Admin",
   "Password": "admin123"

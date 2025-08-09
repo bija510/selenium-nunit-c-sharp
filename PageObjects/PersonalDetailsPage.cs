@@ -52,7 +52,7 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
 
         public void ClickSave()
         {
-            //_WebUI.ScrollToElement(saveButton);
+            _WebUI.ScrollToElement(saveButton);
             _WebUI.Click(saveButton);
         }
     }
