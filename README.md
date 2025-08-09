@@ -148,6 +148,64 @@ dotnet test --filter "FullyQualifiedName~Tests"
 - Facilitates detailed logging, test categorization, and report customization  
 - Helps keep test code clean by centralizing common reusable functions and setup tasks  
 
+# Commit Message Conventions
+
+To keep commit history clean, consistent, and easy to understand, please follow the **Conventional Commit** types below when writing commit messages.
+
+## Common Commit Types
+
+| Type     | When to Use                                                   |
+|----------|---------------------------------------------------------------|
+| **feat** | A new feature                                                 |
+| **fix**  | A bug fix                                                    |
+| **docs** | Documentation-only changes                                   |
+| **style**| Code style changes (formatting, missing semi-colons, etc.) — no logic change |
+| **refactor** | Code changes that neither fixes a bug nor adds a feature |
+| **perf** | Performance improvements                                    |
+| **test** | Adding or updating tests                                    |
+| **chore**| Changes to build process, auxiliary tools, libraries, or maintenance (no production code) |
+
+## Examples for Your Project
+
+| Type     | Example Commit Message                                     |
+|----------|------------------------------------------------------------|
+| feat     | `feat(login): add remember me checkbox`                    |
+| fix      | `fix(cart): correct item quantity calculation`             |
+| docs     | `docs(readme): update installation instructions`           |
+| style    | `style: fix indentation and spacing`                       |
+| refactor | `refactor: simplify login validation logic`                |
+| perf     | `perf: improve page load time by optimizing queries`       |
+| test     | `test: add unit tests for order service`                    |
+| chore    | `chore: add environment info to extent report`             |
+
+## Guidance for This Project
+
+- Use **`chore:`** for infrastructure, configuration, tooling, or housekeeping tasks (e.g., adding environment info to Extent reports).  
+- Use **`docs:`** when updating documentation like README files.  
+- Use **`feat:`** for adding new test cases or reporting features.  
+- Use **`fix:`** to correct bugs in tests or automation code.  
+
+## Commit Message Format
+
+```
+A. <type>(<scope>): <short summary>
+        or
+B. <type>: <short summary>
+        or
+C. <type>: <short summary>
+- Detail 1
+- Detail 2
+- Detail 3
+```
+
+- **`<type>`**: One of the commit types listed above.  
+- **`<scope>`**: The area of the codebase affected (optional but recommended).  
+- **`<short summary>`**: A concise description of the change.  
+
+---
+Keeping commit messages consistent helps everyone understand the project history and makes generating changelogs and releases easier.
+---
+
 ## 📦 NuGet Packages Used
 - AutoltX.Dotnet (3.3.14.5)
 - BC.WeblJlWrapper (0.0.2-alpha)
