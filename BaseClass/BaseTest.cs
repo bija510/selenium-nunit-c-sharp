@@ -11,6 +11,7 @@ using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using System;
 using System.IO;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace C_Sharp_Selenium_NUnit.BaseClass
 {
@@ -50,7 +51,10 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
         public void Setup()
         {
             // Create a test node in ExtentReports for each test
+
+            //give full name in report  "C_Sharp_Selenium_NUnit.Tests.LoginTest.Login" (ProjectNamespace.FolderName.ClassName.MethodName)
             test = extent?.CreateTest(TestContext.CurrentContext.Test.FullName);
+
             // Link WebUI wrapper logs to Extent test
             BC.Selenium.WebUI.WebUI.ExtentLogger = msg => test?.Info(msg);
 
