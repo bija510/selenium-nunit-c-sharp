@@ -31,12 +31,14 @@ jobs:
       run: dotnet test --no-build --filter "FullyQualifiedName~Tests" --verbosity normal
 
     - name: Prepare deployment folder
+      if: always()
       run: |
         mkdir deploy
         # Copy all report files to deploy folder
         cp -r Reports/* deploy/
 
     - name: Rename latest report to index.html
+      if: always()
       run: |
         cd deploy
         latest_report=$(ls -t Report_CHROME_QA_*.html | head -1)
