@@ -98,7 +98,8 @@ The `Examples/` folder contains a comprehensive set of ready-to-run raw demo tes
 
 The **Page Object Model (POM)** design pattern helps keep your test code clean and maintainable by separating page-specific UI interactions into dedicated classes under `PageObjects/`.  
 Each page class encapsulates element locators and actions, enabling reusable, readable, and easy-to-update test scripts. This reduces duplication and improves test stability.  
-> **❌ Note on PageFactory and `@FindBy`:**  
+
+> 🛑 Deprecated in 3.11 (Nov 2017)  **❌ Note on PageFactory and `@FindBy`:** 
 > While PageFactory with `@FindBy` annotations was popular for element initialization, it has known drawbacks:  
 > - ⚠️ **Stale element references** can occur if the page reloads or elements change dynamically  
 > - 🐢 Can introduce **performance overhead** due to proxy creation and lazy loading  
@@ -180,7 +181,7 @@ To keep commit history clean, consistent, and easy to understand, please follow 
 - Use **`feat:`** for adding new test cases or reporting features.  
 - Use **`fix:`** to correct bugs in tests or automation code.  
 
-### Commit Message Format
+### Git Commit Message Format
 ```
 A. <type>(<scope>): <short summary>
         or
@@ -202,16 +203,49 @@ C. <type>: <short summary>
 ## 📦 NuGet Packages Used
 - AutoltX.Dotnet (3.3.14.5)
 - BC.WeblJlWrapper (0.0.2-alpha)
-- DotNetSeleniumExtras.WaitHelpers (3.11.0)
+- ⚠️ DotNetSeleniumExtras.WaitHelpers (3.11.0) => `(Provides ExpectedConditions class for WebDriverWait, last updated 3/11/2018) Deprecated in 3.11 (Nov 2017)`
+- ❌ DotNetSeleniumExtras.PageObjects (3.11.0) => `(provides PageFactory (@FindBy) for .NET last updated 3/11/2018) Deprecated in 3.11 (Nov 2017)`
 - ExtentReports (5.0.4)
 - Microsoft.NET.Test.Sdk (17.14.1)
 - Microsoft.Office.lnterop.Excel (15.0.4795.1001)
 - Newtonsoft.Json (13.0.3)
 - NUnit (4.3.2)
 - NUnit3TestAdapter (5.0.0)
-- Selenium.Support (4.34.0)
+- Selenium.Support (4.34.0) ()
 - Selenium.WebDriver (4.34.0)
 - WebDriverManager (2.17.6)
+
+## Explicit Waiting Strategies
+When automating with Selenium WebDriver in C#, waiting for elements or conditions is crucial for stable tests. There are `three common approaches` you might see or use, especially with Selenium 4.34.0:
+
+### ❌ 1. Old (Obsolete) — `ExpectedConditions` from Selenium.Support (pre-4.x)
+
+```csharp
+// 🚫 Deprecated and removed in Selenium 4.x — this code will NOT compile or run
+WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+wait.Until(ExpectedConditions.ElementIsVisible(By.Id("username")));
+```
+
+### ⚠️ 2. Usage with DotNetSeleniumExtras.WaitHelpers
+- 🕰️ Old / Legacy — last release was in 2018
+- ⚠️ No longer actively maintained or supported by Selenium. Use alternatives for new projects.
+- Minimal code change, requires NuGet using SeleniumExtras.WaitHelpers;
+- Drop-in replacement, requires adding the DotNetSeleniumExtras.WaitHelpers NuGet package using SeleniumExtras.WaitHelpers;
+```csharp
+using SeleniumExtras.WaitHelpers; // Make sure to install DotNetSeleniumExtras.WaitHelpers
+WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+IWebElement el = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("username")));
+```
+
+### ✅ 3. Usage with Pure Lambda (Built into Selenium.Support) — No Extra Packages Needed
+ Best No external dependency — you stick to pure Selenium Lambda - Future-proof, no NuGet, more control
+```csharp
+WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+IWebElement el = wait.Until(d => {
+    var element = d.FindElement(By.Id("username"));
+    return (element.Displayed && element.Enabled) ? element : null;
+});
+```
 
 ## 👥 Author
 Bijay Chhetri
