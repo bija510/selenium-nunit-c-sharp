@@ -15,8 +15,6 @@ namespace C_Sharp_Selenium_NUnit.Tests
         [Test]
         public void TestUsingData()
         {
-          
-
             Console.WriteLine("===>"+pd.FirstName);  // Adam
             Console.WriteLine("===>" + pd.LastName);   // Smith
         }

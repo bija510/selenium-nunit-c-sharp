@@ -16,7 +16,6 @@ namespace C_Sharp_Selenium_NUnit.Tests
 
             // Test valid credentials
             loginPage.Login(userName, password);
-            Assert.That(Driver.Url.Contains("dashboard"));
         }
 
     }

@@ -31,6 +31,7 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
             _WebUI.SendKeys(userNameField, userName);
             _WebUI.SendKeys(passwordField, password);
             _WebUI.Click(loginBtn);
+            _WebUI.Delay(2);
             _WebUI.VerifyTextPresent("Dashboard");
         }
     }

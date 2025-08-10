@@ -5,10 +5,10 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
 {
     class PersonalDetailsPage
     {
-        private readonly IWebDriver Driver;
+        private readonly IWebDriver? Driver;
         private readonly WebUI _WebUI;
 
-        public PersonalDetailsPage(IWebDriver driver)
+        public PersonalDetailsPage(IWebDriver? driver)
         {
             Driver = driver;
             _WebUI = new WebUI(driver);
@@ -26,7 +26,7 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
        
 
         // Methods
-        public void NavigateTo(string url)
+        public void NavigateTo(string? url)
         {
             _WebUI.NavigateToUrl(url);
             _WebUI.WaitForElementVisible(pageTitle);
@@ -39,11 +39,11 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
         }
         public bool IsAt() => _WebUI.VerifyElementDisabled(pageTitle);
 
-        public void EnterFirstName(string firstName) => _WebUI.SetText(employeeFirstInput, firstName);
-        public void EnterLastName(string lastName) => _WebUI.SetText(employeeLastNameInput, lastName);
+        public void EnterFirstName(string? firstName) => _WebUI.SetText(employeeFirstInput, firstName);
+        public void EnterLastName(string? lastName) => _WebUI.SetText(employeeLastNameInput, lastName);
 
-        public void EnterOtherId(string otherId) => _WebUI.SetText(otherIdField, otherId);
-        public void EnterDriverLicenseNum(string licenseNum) => _WebUI.SetText(driverLicenseNumberField, licenseNum);
+        public void EnterOtherId(string? otherId) => _WebUI.SetText(otherIdField, otherId);
+        public void EnterDriverLicenseNum(string? licenseNum) => _WebUI.SetText(driverLicenseNumberField, licenseNum);
 
         public string GetFirstName() => _WebUI.GetAttribute(employeeFirstInput, "value");
         public string GetLastName() => _WebUI.GetAttribute(employeeLastNameInput, "value");
@@ -52,7 +52,8 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
 
         public void ClickSave()
         {
-            _WebUI.ScrollToElement(saveButton);
+            _WebUI.ScrollToPosition(0, 300); // Scroll down to make the button visible
+            _WebUI.Delay(2);
             _WebUI.Click(saveButton);
         }
     }

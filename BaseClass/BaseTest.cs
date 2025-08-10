@@ -18,7 +18,7 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
     public class BaseTest
     {
         protected IWebDriver? Driver;
-        protected static TestData pd;
+        protected static TestData? pd;
         protected ExtentReports? extent;
         protected ExtentTest? test;
 

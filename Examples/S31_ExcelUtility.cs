@@ -1,10 +1,5 @@
-﻿using System.Threading;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using excel = Microsoft.Office.Interop.Excel;
+﻿using excel = Microsoft.Office.Interop.Excel;
 using NUnit.Framework;
-using System;
-using System.IO;
 
 namespace C_Sharp_Selenium_NUnit.Examples
 {
