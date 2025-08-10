@@ -42,4 +42,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: Reports/ # same as your Extent report folder
+        publish_dir: ./deploy
+        publish_branch: gh-pages # Default branch for Pages
