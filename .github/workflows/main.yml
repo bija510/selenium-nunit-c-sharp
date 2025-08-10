@@ -39,12 +39,13 @@ jobs:
 
     - name: Rename latest report to index.html
       if: always()
+      shell: powershell
       run: |
         cd deploy
-        latest_report=$(ls -t Report_CHROME_QA_*.html | head -1)
-        echo "Latest report: $latest_report"
-        cp "$latest_report" index.html
-
+        $latest_report = Get-ChildItem -Path . -Filter "Report_CHROME_QA_*.html" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        Write-Host "Latest report: $($latest_report.Name)"
+        Copy-Item -Path $latest_report.FullName -Destination "index.html" -Force
+        
     - name: Upload Extent HTML Report
       if: always()
       uses: actions/upload-artifact@v4
