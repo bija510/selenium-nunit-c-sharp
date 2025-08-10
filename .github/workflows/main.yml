@@ -30,6 +30,21 @@ jobs:
     - name: Run filtered tests
       run: dotnet test --no-build --filter "FullyQualifiedName~Tests" --verbosity normal
 
+    - name: Prepare deployment folder
+      if: always()
+      run: |
+        mkdir deploy
+        # Copy all report files to deploy folder
+        cp -r Reports/* deploy/
+
+    - name: Rename latest report to index.html
+      if: always()
+      run: |
+        cd deploy
+        latest_report=$(ls -t Report_CHROME_QA_*.html | head -1)
+        echo "Latest report: $latest_report"
+        cp "$latest_report" index.html
+
     - name: Upload Extent HTML Report
       if: always()
       uses: actions/upload-artifact@v4
@@ -42,4 +57,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: Reports/ # same as your Extent report folder
+        publish_dir: ./deploy
+        publish_branch: gh-pages # Default branch for Pages
