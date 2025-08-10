@@ -1,0 +1,45 @@
+name: Smoke Tests - Windows
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  smoke-tests-windows:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+
+    - name: Restore NuGet packages
+      run: dotnet restore --configfile nuget.config
+
+    - name: Build solution
+      run: dotnet build --no-restore
+
+    - name: Run filtered tests
+      run: dotnet test --no-build --filter "FullyQualifiedName~Tests" --verbosity normal
+
+    - name: Upload Extent HTML Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: html-report
+        path: Reports/ # make sure this matches your Extent report output folder
+
+    - name: Deploy to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: Reports/ # same as your Extent report folder
