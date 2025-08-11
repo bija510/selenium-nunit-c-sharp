@@ -12,6 +12,10 @@ using AventStack.ExtentReports.Reporter;
 using System;
 using System.IO;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
+using WebDriverManager.Helpers;
+using WebDriverManager;
+using System.Runtime.Intrinsics.X86;
 
 namespace C_Sharp_Selenium_NUnit.BaseClass
 {
@@ -61,12 +65,19 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
             switch (browser.ToLower())
             {
                 case "chrome":
-                    new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
+                    // WebDriverManager downloaded a ChromeDriver v139, but your installed Chrome browser v138 mismatch 
+                    // System.InvalidOperationException : session not created:
+                    //new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
+
+                    // ✔️ Best practice:
+                    // Use VersionResolveStrategy.MatchingBrowser in WebDriverManager so you avoid this mismatch (v138-chromedriver and v139-browser) without pinning or manual updates.
+                    new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser); 
                     Driver = new ChromeDriver();
                     break;
 
                 case "edge":
-                    new WebDriverManager.DriverManager().SetUpDriver(new EdgeConfig());
+                    //new WebDriverManager.DriverManager().SetUpDriver(new EdgeConfig());
+                    new WebDriverManager.DriverManager().SetUpDriver(new EdgeConfig(), VersionResolveStrategy.MatchingBrowser);
                     Driver = new EdgeDriver();
 
                     break;
