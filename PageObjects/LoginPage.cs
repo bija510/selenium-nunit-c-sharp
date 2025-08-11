@@ -17,10 +17,10 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
         }
 
         // Locators
-        private readonly By userNameField = By.XPath("//input[@placeholder='Username']");
-        private readonly By passwordField = By.XPath("//input[@placeholder='Password']");
+        private readonly By userNameTxt = By.XPath("//input[@placeholder='Username']");
+        private readonly By passwordTxt = By.XPath("//input[@placeholder='Password']");
         private readonly By loginBtn = By.XPath("//button[@type='submit']");
-        private readonly By dashboardLabel = By.XPath("//h6[@class='oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module']");
+        private readonly By dashboardLbl = By.XPath("//h6[@class='oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module']");
 
         public void OpenLoginPage(string url)
         {
@@ -28,11 +28,11 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
         }
         public void Login(string userName, string password)
         {
-            _WebUI.SendKeys(userNameField, userName);
-            _WebUI.SendKeys(passwordField, password);
-            _WebUI.Click(loginBtn);
+            _WebUI.SendKeys("UserName Txt", userNameTxt, userName);
+            _WebUI.SendKeys("Password Txt", passwordTxt, password);
+            _WebUI.Click("Save Bth", loginBtn);
             _WebUI.Delay(2);
-            _WebUI.VerifyTextPresent("Dashboard");
+            _WebUI.VerifyTextPresent("Dashboard Lbl", "Dashboard");
         }
     }
 }

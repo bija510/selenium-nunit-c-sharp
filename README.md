@@ -247,6 +247,41 @@ IWebElement el = wait.Until(d => {
     return (element.Displayed && element.Enabled) ? element : null;
 });
 ```
+## How to Update the Local BC.WebUIWrapper to the Latest Version
+1. Open the `BC.Selenium.WebUIWrapper` project in Visual Studio.
+2. Increment the `<Version>` tag in `BC.Selenium.WebUI.csproj` to the desired version, 
+for example: `Alpha → Beta → Release Candidate → Stable` is the typical progression of pre-release labels.
+    ```xml
+    <Version>0.0.3-beta</Version>
+    
+    ```
+
+3. Clean and build the solution:
+    - **Build → Clean Solution**
+    - **Build → Build Solution**
+
+4. Locate the generated `.nupkg` file in the `BC.Selenium.WebUI\bin\Release directory`.
+
+5. Copy the .nupkg file to the test solution’s local packages folder:
+    ```
+    selenium-nunit-c-sharp\packages
+    ```
+6. Open the test solution in Visual Studio.
+
+7. Open Tools → NuGet Package Manager → Package Manager Console and run:
+    ```
+    dotnet nuget locals all --clear
+    ```
+
+8. Restore NuGet packages with your custom config:
+    ```
+    dotnet restore --configfile nuget.config
+    ```
+
+9. Finally, clean and rebuild the test solution:
+    - **Build → Clean Solution**
+    - **Build → Build Solution**
+
 
 ## 👥 Author
 Bijay Chhetri
