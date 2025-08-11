@@ -130,15 +130,16 @@ dotnet test --filter "FullyQualifiedName~Tests"
 - You can also override config via environment variables or by editing TestConfig.json
 
 
-### 📊 Reports
+## 📊 Reports
 
-- Detailed HTML reports generated using **ExtentReports**, saved in the `Reports/` folder as `AutomationReport_*.html`  
-- 📋 Comprehensive test execution summaries with pass/fail status and logs  
-- 📸 Screenshots captured on test failures are linked within reports for easy debugging  
-- 🧾 Facilitates quick insights into test suite health and detailed results analysis  
+- 📂 HTML reports generated using ExtentReports, saved in `Reports/ as Report_CHROME_QA_DateTimeStamp.html`.
+- 📋 Summary of test results with `pass/fail status, logs`, and linked failure `screenshots`.
+- 🖥️ Includes key system/environment details like User Name, .NET version, NUnit version, run time, Git branch, machine info, environment, tester, OS, and browser.
+- 🚀 Reports are automatically `published to GitHub Pages` on the gh-pages branch after each CI run—visit the site URL in `Settings → Pages → Visit site` to view the latest report live.
+- 📦 After each run, the HTML report is `also available as a downloadable` artifact named html-report in the GitHub Actions workflow.
 
 
-### 🛠️ Utils
+## 🛠️ Utils
 
 - Contains utility classes and helpers to support test execution and reporting  
 - `Utils/ExtentReportManager.cs` manages the **ExtentReports** lifecycle as a singleton, ensuring consistent and thread-safe report generation  
@@ -149,7 +150,7 @@ dotnet test --filter "FullyQualifiedName~Tests"
 
 To keep commit history clean, consistent, and easy to understand, please follow the **Conventional Commit** types below when writing commit messages.
 
-### Common Commit Types
+## Common Commit Types
 
 | Type     | When to Use                                                   |
 |----------|---------------------------------------------------------------|
