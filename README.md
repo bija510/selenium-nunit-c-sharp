@@ -122,9 +122,19 @@ Example benefits of the POM approach (without PageFactory):
 - Automatically captured during `[TearDown]` if test fails.
 
 ## ▶️ Running Tests
-You can run the tests using Visual Studio Test Explorer or via CLI:
+You can run the tests either through **Visual Studio Test Explorer** or via the **.NET CLI**.  
 ```bash
+# Run all tests in the Tests folder
 dotnet test --filter "FullyQualifiedName~Tests"
+
+# Run only Smoke tests
+dotnet test --filter "TestCategory=Smoke"
+
+# Run only Sanity tests
+dotnet test --filter "TestCategory=Sanity"
+
+# Run only Regression tests
+dotnet test --filter "TestCategory=Regression"
 ```
 - This runs tests in the Tests folder.
 - You can also override config via environment variables or by editing TestConfig.json
@@ -203,7 +213,7 @@ C. <type>: <short summary>
 
 ## 📦 NuGet Packages Used
 - AutoltX.Dotnet (3.3.14.5)
-- BC.WeblJlWrapper (0.0.2-alpha)
+- BC.WeblJlWrapper (0.0.4-beta)
 - ⚠️ DotNetSeleniumExtras.WaitHelpers (3.11.0) => `(Provides ExpectedConditions class for WebDriverWait, last updated 3/11/2018) Deprecated in 3.11 (Nov 2017)`
 - ❌ DotNetSeleniumExtras.PageObjects (3.11.0) => `(provides PageFactory (@FindBy) for .NET last updated 3/11/2018) Deprecated in 3.11 (Nov 2017)`
 - ExtentReports (5.0.4)
