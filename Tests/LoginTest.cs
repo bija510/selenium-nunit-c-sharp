@@ -10,6 +10,7 @@ namespace C_Sharp_Selenium_NUnit.Tests
     {
 
         [Test]
+        [Category("Smoke")]   // applies only to this test
         public void Login()
         {
             test!.Info(MarkupHelper.CreateLabel("Verify Login successfully", ExtentColor.Blue));

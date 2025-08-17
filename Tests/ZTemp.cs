@@ -13,6 +13,7 @@ namespace C_Sharp_Selenium_NUnit.Tests
     class ZTemp : BaseTest
     {
         [Test]
+        [Category("Regression")]   // applies only to this test
         public void TestUsingData()
         {
             Console.WriteLine("===>"+pd.FirstName);  // Adam

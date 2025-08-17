@@ -20,6 +20,7 @@ namespace C_Sharp_Selenium_NUnit.Tests
         private PersonalDetailsPage? personalDetailsPage;
 
         [Test]
+        [Category("Regression")]   // applies only to this test
         public void EditName_SaveAndVerify()
         {
             // Highlighted step (bold + colored label)

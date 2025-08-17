@@ -20,6 +20,7 @@ namespace C_Sharp_Selenium_NUnit.Tests
         private PersonalDetailsPage? personalDetailsPage;
 
         [Test]
+        [Category("Smoke")]   // applies only to this test
         public void VerifyInfoMenuPage()
         {
             test!.Info(MarkupHelper.CreateLabel("Verify Login successfully", ExtentColor.Blue));
