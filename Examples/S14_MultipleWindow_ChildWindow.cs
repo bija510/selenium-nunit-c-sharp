@@ -27,7 +27,7 @@ namespace C_Sharp_Selenium_NUnit.Examples
         [Test]
         public void openNewTab()
         {
-            driver.Url = "https://www.rahulshettyacademy.com/AutomationPractice/";
+            driver!.Url = "https://www.rahulshettyacademy.com/AutomationPractice/";
             driver.FindElement(By.XPath("//a[@id='opentab']")).Click();
 
             Console.WriteLine("num of open window" + driver.WindowHandles.Count);

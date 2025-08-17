@@ -31,7 +31,7 @@ namespace C_Sharp_Selenium_NUnit.Examples
             Console.WriteLine("Current Date: " + currentDate);
             Console.WriteLine("Current Time: " + currentTime);
 
-            driver.Navigate().GoToUrl("http://demo.automationtesting.in/Datepicker.html");
+            driver!.Navigate().GoToUrl("http://demo.automationtesting.in/Datepicker.html");
 
             driver.FindElement(By.Id("datepicker2")).Click();
             List<IWebElement> days = new List<IWebElement>(driver.FindElements(By.XPath("//table[@class='ui-datepicker-calendar']//td[not(contains(@class, 'ui-datepicker-other-month'))]")));
@@ -52,14 +52,14 @@ namespace C_Sharp_Selenium_NUnit.Examples
         [Test]
         public void EnableDatePickerSendKeys()
         {
-            driver.Navigate().GoToUrl("http://demo.automationtesting.in/Datepicker.html");
-            driver.FindElement(By.Id("datepicker2")).SendKeys(currentDate);
+            driver!.Navigate().GoToUrl("http://demo.automationtesting.in/Datepicker.html");
+            driver.FindElement(By.Id("datepicker2")).SendKeys(currentDate!);
         }
 
         [Test]
         public void SetDisabledDatePickerViaJS()
         {
-            driver.Navigate().GoToUrl("http://demo.automationtesting.in/Datepicker.html");
+            driver!.Navigate().GoToUrl("http://demo.automationtesting.in/Datepicker.html");
 
             IWebElement disabledInput = driver.FindElement(By.Id("datepicker1"));
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;

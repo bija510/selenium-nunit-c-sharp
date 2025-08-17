@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "selenium-nunit-c-sharp": {
+      "commandName": "Project"
+    }
+  }
+}

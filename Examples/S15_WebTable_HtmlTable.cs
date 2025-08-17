@@ -24,7 +24,7 @@ namespace C_Sharp_Selenium_NUnit.Examples
         [Test]
         public void demo()
         {
-            driver.Url = "https://www.w3schools.com/html/html_tables.asp";
+            driver!.Url = "https://www.w3schools.com/html/html_tables.asp";
             IJavaScriptExecutor JS = (IJavaScriptExecutor)driver;
             JS.ExecuteScript("window.scrollBy(0,300)");
 
@@ -49,7 +49,7 @@ namespace C_Sharp_Selenium_NUnit.Examples
     [Test]
     public void runGetAnyText()
         {
-        driver.Url = "https://www.w3schools.com/html/html_tables.asp";
+        driver!.Url = "https://www.w3schools.com/html/html_tables.asp";
 		IJavaScriptExecutor JS = (IJavaScriptExecutor)driver;
         JS.ExecuteScript("window.scrollBy(0,300)");
             Console.WriteLine(clickOrGetText("//table[@id='customers']", "UK" , "Contact"));
@@ -61,7 +61,7 @@ namespace C_Sharp_Selenium_NUnit.Examples
         Boolean found = false;
         String retVal = "";
 
-        IWebElement Table =  driver.FindElement(By.XPath(tableXpath));
+        IWebElement Table =  driver!.FindElement(By.XPath(tableXpath));
         IList<IWebElement> Rows =Table.FindElements(By.TagName("tr"));
         IList<IWebElement> ColHeaders = Rows[0].FindElements(By.TagName("th"));
         for (int i = 0; i < ColHeaders.Count; i++)

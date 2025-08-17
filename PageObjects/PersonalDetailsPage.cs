@@ -29,7 +29,7 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
         public void NavigateTo(string? url)
         {
             _WebUI.NavigateToUrl(url);
-            _WebUI.WaitForElementVisible("Page Title", pageTitle);
+            _WebUI.WaitForElementVisible(pageTitle);
         }
 
         public void ClickMyInfoMenu()

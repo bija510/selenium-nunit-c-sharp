@@ -1,15 +1,16 @@
-﻿using BC.Selenium.WebUI;
+﻿using AventStack.ExtentReports.MarkupUtils;
+using BC.Selenium.WebUI;
+using C_Sharp_Selenium_NUnit.BaseClass;
+using C_Sharp_Selenium_NUnit.Data;
 using C_Sharp_Selenium_NUnit.PageObjects;
 using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using C_Sharp_Selenium_NUnit.BaseClass;
-using C_Sharp_Selenium_NUnit.Data;
 
 namespace C_Sharp_Selenium_NUnit.Tests
 {
@@ -21,12 +22,18 @@ namespace C_Sharp_Selenium_NUnit.Tests
         [Test]
         public void EditName_SaveAndVerify()
         {
+            // Highlighted step (bold + colored label)
+            test!.Info(MarkupHelper.CreateLabel("Verify Login successfully", ExtentColor.Blue));
+
             var loginPage = new LoginPage(Driver);
             loginPage.OpenLoginPage(baseUrl);
 
             // Login to application
             loginPage.Login(userName, password);
             Thread.Sleep(2000); // Wait for the page to load
+
+            // Highlighted step (bold + colored label)
+            test.Info(MarkupHelper.CreateLabel("Verify personal details page", ExtentColor.Blue));
 
             //Enter personal details
             personalDetailsPage = new PersonalDetailsPage(Driver);

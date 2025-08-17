@@ -1,6 +1,7 @@
-﻿using NUnit.Framework;
+﻿using AventStack.ExtentReports.MarkupUtils;
 using C_Sharp_Selenium_NUnit.BaseClass;
 using C_Sharp_Selenium_NUnit.PageObjects;
+using NUnit.Framework;
 
 namespace C_Sharp_Selenium_NUnit.Tests
 {
@@ -11,6 +12,7 @@ namespace C_Sharp_Selenium_NUnit.Tests
         [Test]
         public void Login()
         {
+            test!.Info(MarkupHelper.CreateLabel("Verify Login successfully", ExtentColor.Blue));
             var loginPage = new LoginPage(Driver);
             loginPage.OpenLoginPage(baseUrl);
 

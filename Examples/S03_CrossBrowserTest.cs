@@ -13,7 +13,7 @@ namespace C_Sharp_Selenium_NUnit.Examples
     [TestFixture]
     public class S03_CrossBrowserTest
     {
-        private IWebDriver driver;
+        private IWebDriver? driver;
 
         [Test]
         public void ChromeTest()

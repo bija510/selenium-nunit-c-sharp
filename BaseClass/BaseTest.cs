@@ -28,12 +28,12 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
 
         //TestProfile = POCO – Plain Old CLR Object) that define to match the structure of your JSON config file.
         protected static readonly TestProfile Config = ConfigReader.Load();
-        private string environment = Config.Environment;
-        private string browser = Config.Browser.ToUpper();
+        private string environment = Config.Environment!;
+        private string browser = Config.Browser!.ToUpper();
 
-        protected string baseUrl = Config.BaseUrl;
-        protected string userName = Config.UserName;
-        protected string password = Config.Password;
+        protected string baseUrl = Config.BaseUrl!;
+        protected string userName = Config.UserName!;
+        protected string password = Config.Password!;
 
 
         [OneTimeSetUp]
@@ -71,7 +71,7 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
 
                     // ✔️ Best practice:
                     // Use VersionResolveStrategy.MatchingBrowser in WebDriverManager so you avoid this mismatch (v138-chromedriver and v139-browser) without pinning or manual updates.
-                    new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser); 
+                    new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser);
                     Driver = new ChromeDriver();
                     break;
 
@@ -95,7 +95,7 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
 
             Log($"Driver initialized for: {browser}");
 
-            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
+            Driver!.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
             Log($"Page load timeout set to 30 seconds.");
 
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
@@ -111,73 +111,58 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
         [TearDown]
         public void TearDown()
         {
-            var fullTestName = TestContext.CurrentContext.Test.FullName;
             var testMethodName = TestContext.CurrentContext.Test.Name;
             var testOutcome = TestContext.CurrentContext.Result.Outcome.Status;
-            var status = TestContext.CurrentContext.Result.Outcome.Status;
             var errorMessage = TestContext.CurrentContext.Result.Message;
             var stackTrace = TestContext.CurrentContext.Result.StackTrace;
 
-            switch (status)
+            switch (testOutcome)
             {
                 case NUnit.Framework.Interfaces.TestStatus.Passed:
-                    test?.Pass("Test passed");
+                    test?.Pass(AventStack.ExtentReports.MarkupUtils.MarkupHelper
+                        .CreateLabel("PASSED", AventStack.ExtentReports.MarkupUtils.ExtentColor.Green));
                     break;
+
                 case NUnit.Framework.Interfaces.TestStatus.Failed:
-                    test?.Fail(errorMessage);
-                    test?.Fail(stackTrace);
+                    test?.Fail(errorMessage)
+                        .Fail(stackTrace)
+                        .Fail(AventStack.ExtentReports.MarkupUtils.MarkupHelper
+                            .CreateLabel("FAILED", AventStack.ExtentReports.MarkupUtils.ExtentColor.Red));
+
+                    try
+                    {
+                        string projectRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\.."));
+                        string screenshotDir = Path.Combine(projectRoot, "Screenshots");
+                        Directory.CreateDirectory(screenshotDir);
+
+                        string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                        string screenshotPath = Path.Combine(screenshotDir, $"{testMethodName}_{timestamp}.png");
+
+                        Screenshot screenshot = ((ITakesScreenshot)Driver!).GetScreenshot();
+                        screenshot.SaveAsFile(screenshotPath);
+
+                        Log($"Screenshot saved to: {screenshotPath}");
+
+                        // Attach screenshot in report
+                        test?.AddScreenCaptureFromPath(screenshotPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log($"Failed to take screenshot: {ex.Message}");
+                    }
                     break;
+
                 default:
-                    test?.Skip("Test skipped or inconclusive");
+                    test?.Skip(AventStack.ExtentReports.MarkupUtils.MarkupHelper
+                        .CreateLabel("SKIPPED / INCONCLUSIVE", AventStack.ExtentReports.MarkupUtils.ExtentColor.Orange));
                     break;
             }
 
             Log($"Test finished: {testMethodName} with status {testOutcome}");
 
-
-
-
-            if (testOutcome == NUnit.Framework.Interfaces.TestStatus.Failed)
-            {
-                test?.Fail("Test Failed: " + errorMessage);
-                test?.Fail(stackTrace);
-
-                try
-                {
-                    string projectRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\.."));
-                    string screenshotDir = Path.Combine(projectRoot, "Screenshots");
-                    Directory.CreateDirectory(screenshotDir);
-
-                    string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                    string screenshotPath = Path.Combine(screenshotDir, $"{testMethodName}_{timestamp}.png");
-
-                    Screenshot screenshot = ((ITakesScreenshot)Driver).GetScreenshot();
-                    screenshot.SaveAsFile(screenshotPath);
-
-                    Log($"Screenshot saved to: {screenshotPath}");
-
-                    // Add screenshot to report
-                    test?.AddScreenCaptureFromPath(screenshotPath);
-                }
-                catch (Exception ex)
-                {
-                    Log($"Failed to take screenshot: {ex.Message}");
-                }
-            }
-            else if (testOutcome == NUnit.Framework.Interfaces.TestStatus.Passed)
-            {
-                test?.Pass("Test Passed");
-            }
-            else
-            {
-                test?.Skip("Test Skipped or Inconclusive");
-            }
-
             // Cleanup driver
             try
             {
-
-
                 Driver?.Quit();
                 Log("Driver quit successfully");
             }
