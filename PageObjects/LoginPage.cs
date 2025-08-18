@@ -30,7 +30,7 @@ namespace C_Sharp_Selenium_NUnit.PageObjects
         {
             _WebUI.SendKeys("UserName Txt", userNameTxt, userName);
             _WebUI.SendKeys("Password Txt", passwordTxt, password);
-            _WebUI.Click("Save Bth", loginBtn);
+            _WebUI.Click("Login Bth", loginBtn);
             _WebUI.Delay(2);
             _WebUI.VerifyTextPresent("Dashboard Lbl", "Dashboard");
         }

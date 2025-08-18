@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoItX.Dotnet" Version="3.3.14.5" />
-    <PackageReference Include="BC.WebUIWrapper" Version="0.0.3-beta" />
+    <PackageReference Include="SeleniumCSharpWrapper" Version="0.1.0-beta" />
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="ExtentReports" Version="5.0.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
