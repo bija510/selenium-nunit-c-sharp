@@ -1,21 +1,22 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Edge;
-using WebDriverManager.DriverConfigs.Impl;
-using OpenQA.Selenium.Firefox;
+﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
 using C_Sharp_Selenium_NUnit.Config;
 using C_Sharp_Selenium_NUnit.Data;
-using OpenQA.Selenium.Chrome;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Newtonsoft.Json;
-using AventStack.ExtentReports;
-using AventStack.ExtentReports.Reporter;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Firefox;
 using System;
 using System.IO;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
-using WebDriverManager.Helpers;
-using WebDriverManager;
+using System.Reactive;
 using System.Runtime.Intrinsics.X86;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
+using WebDriverManager.Helpers;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace C_Sharp_Selenium_NUnit.BaseClass
 {
@@ -132,20 +133,21 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
                     try
                     {
                         string projectRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\.."));
-                        // string screenshotDir = Path.Combine(projectRoot, "Screenshots"); // Due to github page live report failed scripts screenshot image crash.
-                        string screenshotDir = Path.Combine(projectRoot, "Reports");
+                        string screenshotDir = Path.Combine(projectRoot, "Reports", "Screenshots");
                         Directory.CreateDirectory(screenshotDir);
 
                         string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                        string screenshotPath = Path.Combine(screenshotDir, $"{testMethodName}_{timestamp}.png");
+                        string screenshotFile = $"{testMethodName}_{timestamp}.png";
+                        string screenshotPath = Path.Combine(screenshotDir, screenshotFile);
 
                         Screenshot screenshot = ((ITakesScreenshot)Driver!).GetScreenshot();
                         screenshot.SaveAsFile(screenshotPath);
 
                         Log($"Screenshot saved to: {screenshotPath}");
 
-                        // Attach screenshot in report
-                        test?.AddScreenCaptureFromPath(screenshotPath);
+                        // ✅ Use relative path for Extent report so it works in GitHub Pages
+                        string relativePath = Path.Combine("Screenshots", screenshotFile).Replace("\\", "/");
+                        test?.AddScreenCaptureFromPath(relativePath);
                     }
                     catch (Exception ex)
                     {
