@@ -213,7 +213,7 @@ C. <type>: <short summary>
 
 ## 📦 NuGet Packages Used
 - AutoltX.Dotnet (3.3.14.5)
-- BC.WeblJlWrapper (0.0.4-beta)
+- SeleniumCSharpWrapper.0.1.0-beta.nupkg
 - ⚠️ DotNetSeleniumExtras.WaitHelpers (3.11.0) => `(Provides ExpectedConditions class for WebDriverWait, last updated 3/11/2018) Deprecated in 3.11 (Nov 2017)`
 - ❌ DotNetSeleniumExtras.PageObjects (3.11.0) => `(provides PageFactory (@FindBy) for .NET last updated 3/11/2018) Deprecated in 3.11 (Nov 2017)`
 - ExtentReports (5.0.4)
