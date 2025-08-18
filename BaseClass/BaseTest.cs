@@ -132,7 +132,8 @@ namespace C_Sharp_Selenium_NUnit.BaseClass
                     try
                     {
                         string projectRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\.."));
-                        string screenshotDir = Path.Combine(projectRoot, "Screenshots");
+                        // string screenshotDir = Path.Combine(projectRoot, "Screenshots"); // Due to github page live report failed scripts screenshot image crash.
+                        string screenshotDir = Path.Combine(projectRoot, "Reports");
                         Directory.CreateDirectory(screenshotDir);
 
                         string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
